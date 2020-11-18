@@ -14,7 +14,11 @@ counter1=0
 counter2=1
 while read links;
 do  
-    curl $links | tr '\n' ' ' | grep -o "<div id=\""${id[$counter1]}".*<div id=\""${id[$counter2]}"" | grep -oP '(?<=h2 class="woocommerce-loop-product__title">)[^<]*' | awk '{print NR  ". " $s}' > ${id[$counter1]}.txt      #Running the script from <div id="breakfast" to <div id="<next menu>" and so on until end of file to grep menu items of a particular tab
+    curl $links | tr '\n' ' ' |
+    grep -o "<div id=\""${id[$counter1]}".*<div id=\""${id[$counter2]}"" |
+    grep -oP '(?<=h2 class="woocommerce-loop-product__title">)[^<]*' |
+    awk '{print NR  ". " $s}' > ${id[$counter1]}.txt      
+    #Running the script from <div id="breakfast" to <div id="<next menu>" and so on until end of file to grep menu items of a particular tab
     counter1=$(( $counter1 + 1 ));
     counter2=$(( $counter2 + 1 ));
 done < links.txt
